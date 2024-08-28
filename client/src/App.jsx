@@ -8,7 +8,7 @@ import Home from "./pages/Home/Home.jsx";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  console.log(isDarkMode);
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };

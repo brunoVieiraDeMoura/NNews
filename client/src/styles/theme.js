@@ -1,6 +1,6 @@
 // theme.js
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import { red, yellow, grey } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 
 export let lightTheme = createTheme({
   breakpoints: {
@@ -14,56 +14,73 @@ export let lightTheme = createTheme({
   },
   palette: {
     primary: {
-      main: yellow[500],
+      main: "#4B322E",
+      light: "#634843",
+      dark: "#2E1A16",
+      contrastText: "#F6EDDE",
     },
     secondary: {
-      main: grey[500],
+      main: "#889F95",
+      light: "#A3B5AD",
+      dark: "#729284",
+      contrastText: "#E8F1EE",
     },
     error: {
       main: red[500],
+    },
+    background: {
+      default: "#FEF8ED",
+      paper: "#F6EDDE",
     },
   },
   typography: {
     button: {
       textTransform: "",
-      fontFamily: "",
-    },
-    fontFamily: "",
-    h1: {
-      fontFamily: "",
+      fontFamily: "Open Sans",
       fontWeight: "600",
-      color: "",
+    },
+    h1: {
+      fontFamily: "Lora",
+      fontWeight: "600",
+      color: "#4B322E",
+      lineHeight: "1.125",
     },
     h2: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#4B322E",
+      lineHeight: "1.125",
     },
     h3: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#4B322E",
+      lineHeight: "1.125",
     },
     h4: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#4B322E",
+      lineHeight: "1.125",
     },
     h5: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Lora",
+      color: "#4B322E",
+      lineHeight: "1.125",
     },
     h6: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Lora",
+      color: "#4B322E",
     },
     body1: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Open Sans",
+      color: "#796558",
+      lineHeight: "1.4",
     },
     body2: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Open Sans",
+      color: "#796558",
+      lineHeight: "1.4",
     },
   },
   spacing: 8, // Define the spacing factor
@@ -85,56 +102,74 @@ export let darkTheme = createTheme({
   },
   palette: {
     primary: {
-      main: yellow[500],
+      main: "#F0E3CF",
+      light: "#F6EDDE",
+      dark: "#E5D6BE",
+      contrastText: "#4B322E",
     },
     secondary: {
-      main: grey[500],
+      main: "#889F95",
+      light: "#A3B5AD",
+      dark: "#729284",
+      contrastText: "#4B322E",
     },
     error: {
       main: red[500],
+    },
+    background: {
+      default: "#4B322E",
+      paper: "#2E1A16",
     },
   },
   typography: {
     button: {
       textTransform: "",
-      fontFamily: "",
-    },
-    fontFamily: "",
-    h1: {
-      fontFamily: "",
+      fontFamily: "Open Sans",
       fontWeight: "600",
-      color: "",
+    },
+    fontFamily: "Lora",
+    h1: {
+      fontFamily: "Lora",
+      fontWeight: "600",
+      color: "#F0E3CF",
+      lineHeight: "1.125",
     },
     h2: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#F0E3CF",
+      lineHeight: "1.125",
     },
     h3: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#F0E3CF",
+      lineHeight: "1.125",
     },
     h4: {
-      fontFamily: "",
+      fontFamily: "Lora",
       fontWeight: "600",
-      color: "",
+      color: "#F0E3CF",
+      lineHeight: "1.125",
     },
     h5: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Lora",
+      color: "#F0E3CF",
+      lineHeight: "1.125",
     },
     h6: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Lora",
+      color: "#F0E3CF",
     },
     body1: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Open Sans",
+      color: "#DDC9AC",
+      lineHeight: "1.4",
     },
     body2: {
-      fontFamily: "",
-      color: "",
+      fontFamily: "Open Sans",
+      color: "#DDC9AC",
+      lineHeight: "1.4",
     },
   },
   spacing: 8, // Define the spacing factor

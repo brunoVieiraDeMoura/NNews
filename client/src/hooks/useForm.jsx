@@ -11,7 +11,7 @@ const types = {
     message: "A senha deve conter no minimo 1 letra e ao menos 8 caractéres.",
   },
   passwordDiferente: {
-    regex: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/,
+    regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
     booliano: true,
     message: "As senhas precisam ser identicas.",
   },

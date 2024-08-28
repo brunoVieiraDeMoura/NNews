@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import sendEmail from "../utils/sendEmail.js";
+import sendEmail from "../../utils/sendEmail.js";
 import User from "./../../models/User.js";
 
 const validateEmail = (email) => {

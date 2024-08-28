@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticateToken } from "./../../middlewares/autenticatedToken";
+import { authenticateToken } from "./../../middlewares/autenticatedToken.js";
 import {
   registerUser,
   loginUser,

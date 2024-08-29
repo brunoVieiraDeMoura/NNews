@@ -6,6 +6,7 @@ import { darkTheme } from "./styles/theme.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home.jsx";
 import MainContainer from "./layouts/MainContainer.jsx";
+import { UserOptionsContextProvider } from "./context/userOptionsContext.jsx";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -18,11 +19,13 @@ const App = () => {
       <CssBaseline />
 
       <Router>
-        <MainContainer onTheme={toggleTheme}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </MainContainer>
+        <UserOptionsContextProvider>
+          <MainContainer onTheme={toggleTheme}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </MainContainer>
+        </UserOptionsContextProvider>
       </Router>
     </ThemeProvider>
   );

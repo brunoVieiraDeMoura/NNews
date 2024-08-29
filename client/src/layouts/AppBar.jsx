@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -18,10 +18,10 @@ import LogoLight from "../assets/LogoLight.png";
 import PropTypes from "prop-types";
 import useNavigation from "../hooks/useNavigation";
 import routeTabList from "../util/objectTabList";
-import userOptionsListRoute from "../util/objectUserTabList";
+import Typography from "@mui/material/Typography";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import Typography from "@mui/material/Typography";
+import { UserOptionsContext } from "../context/UserOptionsContext.jsx";
 
 const AppBarComponent = ({ onTheme }) => {
   const [leftDrawerOpen, setLeftDrawerOpen] = useState(false);
@@ -33,21 +33,20 @@ const AppBarComponent = ({ onTheme }) => {
     setNameTheme,
     userOptionsList,
     iconTheme,
-    setIconTheme,
-    colorIcon,
     setColorIcon,
-  } = userOptionsListRoute();
+    setIconTheme,
+  } = useContext(UserOptionsContext);
   const { goToHome } = useNavigation();
 
   const toggleTheme = () => {
     setOnThemeColor((onThemeColor) => !onThemeColor);
     setNameTheme(onThemeColor ? "Modo Escuro" : "Modo Claro");
-    setColorIcon(onThemeColor ? "#F0E3CF" : "#2D201A");
+    setColorIcon(onThemeColor ? "#2D201A" : "#DDC9AC");
     setIconTheme(
       onThemeColor ? (
-        <DarkModeIcon sx={{ color: colorIcon }} />
+        <DarkModeIcon sx={{ color: "#2D201A" }} />
       ) : (
-        <LightModeIcon sx={{ color: colorIcon }} />
+        <LightModeIcon sx={{ color: "#DDC9AC" }} />
       ),
     );
     onTheme();
@@ -70,7 +69,6 @@ const AppBarComponent = ({ onTheme }) => {
 
   const tabs = routeTabList;
   const userOptions = userOptionsList;
-  console.log(userOptionsList);
   return (
     <>
       <AppBar position="static">

@@ -8,7 +8,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import PinterestIcon from "@mui/icons-material/Pinterest";
-
+import LogoLight from "../assets/LogoLight.png";
 const Footer = () => {
   return (
     <Box component="footer" mt={5} py={3} bgcolor="primary.main">
@@ -93,7 +93,13 @@ const Footer = () => {
         py={2}
         sx={{ p: 2 }}
       >
-        <Typography variant="h6">Logo</Typography>
+        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+          <img src={LogoLight} alt="Logo" style={{ width: "28px" }} />
+          <Typography variant="body1" color="textSecondary">
+            <span style={{ color: "#FEF8ED" }}>N</span>ath
+            <span style={{ color: "#FEF8ED" }}>N</span>ews
+          </Typography>
+        </Box>
         <Box>
           <IconButton>
             <WhatsAppIcon />

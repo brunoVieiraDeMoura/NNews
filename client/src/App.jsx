@@ -9,7 +9,6 @@ import MainContainer from "./layouts/MainContainer.jsx";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  console.log(isDarkMode);
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };

@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
+import Box from "@mui/material/Box";
 import ListItemButton from "@mui/material/ListItemButton";
 import Divider from "@mui/material/Divider";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,21 +17,46 @@ import ListItemText from "@mui/material/ListItemText";
 import LogoLight from "../assets/LogoLight.png";
 import PropTypes from "prop-types";
 import useNavigation from "../hooks/useNavigation";
+import routeTabList from "../util/objectTabList";
+import userOptionsListRoute from "../util/objectUserTabList";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Typography from "@mui/material/Typography";
 
 const AppBarComponent = ({ onTheme }) => {
   const [leftDrawerOpen, setLeftDrawerOpen] = useState(false);
   const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
   const [openSubList, setOpenSubList] = useState(null);
   const [onThemeColor, setOnThemeColor] = useState(false);
-  const [nameTheme, setNameTheme] = useState("Modo Escuro");
+  const {
+    nameTheme,
+    setNameTheme,
+    userOptionsList,
+    iconTheme,
+    setIconTheme,
+    colorIcon,
+    setColorIcon,
+  } = userOptionsListRoute();
   const { goToHome } = useNavigation();
+
   const toggleTheme = () => {
     setOnThemeColor((onThemeColor) => !onThemeColor);
     setNameTheme(onThemeColor ? "Modo Escuro" : "Modo Claro");
+    setColorIcon(onThemeColor ? "#F0E3CF" : "#2D201A");
+    setIconTheme(
+      onThemeColor ? (
+        <DarkModeIcon sx={{ color: colorIcon }} />
+      ) : (
+        <LightModeIcon sx={{ color: colorIcon }} />
+      ),
+    );
     onTheme();
   };
 
   const toggleLeftDrawer = (open) => () => {
+    if (!open) {
+      setOpenSubList(null);
+    }
     setLeftDrawerOpen(open);
   };
 
@@ -42,82 +68,9 @@ const AppBarComponent = ({ onTheme }) => {
     setOpenSubList(openSubList === index ? null : index);
   };
 
-  const tabs = [
-    {
-      label: "Análises Literárias",
-      path: "/artigos",
-      hasSubList: true,
-      subLists: [
-        { label: "Aventura", path: "/artigos/aventura" },
-        { label: "AudioBooks", path: "/documentacao/calculo-metalico" },
-        {
-          label: "Autoajuda",
-          path: "/documentacao/calculo-concreto",
-        },
-        {
-          label: "Biografia/Autobiografia",
-          path: "/documentacao/calculo-metalico",
-        },
-        { label: "Ciências", path: "/documentacao/calculo-metalico" },
-        { label: "Distopia/Utopia", path: "/documentacao/calculo-metalico" },
-        { label: "Dramática", path: "/documentacao/calculo-metalico" },
-        { label: "Drama", path: "/documentacao/calculo-metalico" },
-        { label: "Ensaios", path: "/documentacao/calculo-metalico" },
-        { label: "Épica", path: "/documentacao/calculo-metalico" },
-        { label: "Fantasia", path: "/documentacao/calculo-metalico" },
-        { label: "Ficção Científica", path: "/documentacao/calculo-metalico" },
-        { label: "Guia de Viagem", path: "/documentacao/calculo-metalico" },
-        { label: "Haiku", path: "/documentacao/calculo-metalico" },
-        { label: "História", path: "/documentacao/calculo-metalico" },
-        {
-          label: "Jornalismo Literário",
-          path: "/documentacao/calculo-metalico",
-        },
-        { label: "Lírica", path: "/documentacao/calculo-metalico" },
-        { label: "Manuais/Tutoriais", path: "/documentacao/calculo-metalico" },
-        { label: "Memórias", path: "/documentacao/calculo-metalico" },
-        { label: "Mistério/Policial", path: "/documentacao/calculo-metalico" },
-        {
-          label: "Negócios/Empreendedorismo",
-          path: "/documentacao/calculo-metalico",
-        },
-        { label: "Romance", path: "/documentacao/calculo-metalico" },
-        { label: "Terror", path: "/documentacao/calculo-metalico" },
-      ],
-    },
-    {
-      label: "Recomendações",
-      path: "/construcao-civil",
-      hasSubList: true,
-      subLists: [
-        { label: "Livro da semana", path: "/construcao-civil/residencial" },
-        { label: "Não pode faltar", path: "/construcao-civil/comercial" },
-        { label: "Achados", path: "/construcao-civil/industrial" },
-      ],
-    },
-    {
-      label: "Textos",
-      path: "/construcao-civil",
-      hasSubList: true,
-      subLists: [
-        { label: "Romance", path: "/construcao-civil/residencial" },
-        { label: "Melancolico", path: "/construcao-civil/comercial" },
-        { label: "Reflexivo", path: "/construcao-civil/industrial" },
-      ],
-    },
-    { label: "Escritores", path: "/perfil", hasSubList: false },
-  ];
-
-  const userOptions = [
-    { label: "Profile", path: "/profile" },
-    { label: "Settings", path: "/settings" },
-    {
-      label: nameTheme,
-      path: null,
-    },
-    { label: "Logout", path: "/logout" },
-  ];
-
+  const tabs = routeTabList;
+  const userOptions = userOptionsList;
+  console.log(userOptionsList);
   return (
     <>
       <AppBar position="static">
@@ -127,7 +80,7 @@ const AppBarComponent = ({ onTheme }) => {
             color="inherit"
             onClick={toggleLeftDrawer(true)}
           >
-            <MenuIcon sx={{ fontSize: "28px" }} />
+            <MenuIcon sx={{ fontSize: "32px" }} />
           </IconButton>
           <IconButton
             sx={{ flex: 1 }}
@@ -136,14 +89,14 @@ const AppBarComponent = ({ onTheme }) => {
             aria-label="logo"
             onClick={goToHome}
           >
-            <img src={LogoLight} alt="Logo" style={{ width: "28px" }} />
+            <img src={LogoLight} alt="Logo" style={{ width: "32px" }} />
           </IconButton>
           <IconButton
             edge="end"
             color="inherit"
             onClick={toggleRightDrawer(true)}
           >
-            <AccountCircleIcon sx={{ fontSize: "28px" }} />
+            <AccountCircleIcon sx={{ fontSize: "32px" }} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -154,10 +107,18 @@ const AppBarComponent = ({ onTheme }) => {
         open={leftDrawerOpen}
         onClose={toggleLeftDrawer(false)}
       >
+        <Typography
+          sx={{ textAlign: "center", p: 2 }}
+          variant="h2"
+          color="primary.light"
+        >
+          Categorias
+        </Typography>
         <List sx={{ zIndex: 1200, width: "280px" }}>
           {tabs.map((tab, index) => (
             <div key={index}>
               <ListItemButton
+                sx={{ mt: 1, mb: 1 }}
                 component={RouterLink}
                 to={tab.path}
                 onClick={() => handleClick(index)}
@@ -179,14 +140,20 @@ const AppBarComponent = ({ onTheme }) => {
                 >
                   <List component="div" disablePadding>
                     {tab.subLists.map((subItem, subIndex) => (
-                      <ListItemButton
-                        key={subIndex}
-                        component={RouterLink}
-                        to={subItem.path}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText primary={subItem.label} />
-                      </ListItemButton>
+                      <Box key={subIndex}>
+                        <ListItemButton
+                          key={subIndex}
+                          component={RouterLink}
+                          to={subItem.path}
+                          sx={{ pl: 4 }}
+                        >
+                          <ListItemText primary={subItem.label} />
+                        </ListItemButton>
+                        <Divider
+                          sx={{ background: "rgba(254,248,237,0.1)" }}
+                          variant="middle"
+                        />
+                      </Box>
                     ))}
                   </List>
                 </Collapse>
@@ -204,17 +171,45 @@ const AppBarComponent = ({ onTheme }) => {
         open={rightDrawerOpen}
         onClose={toggleRightDrawer(false)}
       >
-        <List sx={{ width: "200px" }}>
+        <Typography
+          sx={{ textAlign: "center", p: 2 }}
+          variant="h2"
+          color="primary.light"
+        >
+          Perfil
+        </Typography>
+        <List
+          sx={{
+            width: "280px",
+          }}
+        >
           {userOptions.map((option, index) => (
             <div key={index}>
               <ListItemButton
+                sx={{ mt: 1, mb: 1 }}
                 onClick={
                   userOptions[index].label === nameTheme ? toggleTheme : null
                 }
                 component={RouterLink}
                 to={option.path}
               >
-                <ListItemText primary={option.label} />
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                  }}
+                >
+                  <Box>
+                    {userOptions[index].label === nameTheme
+                      ? iconTheme
+                      : option.icon}
+                  </Box>
+                  <Box>
+                    <ListItemText primary={option.label} />
+                  </Box>
+                </Box>
               </ListItemButton>
               {index < userOptions.length - 1 && <Divider />}
             </div>

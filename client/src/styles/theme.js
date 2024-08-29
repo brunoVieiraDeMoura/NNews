@@ -66,7 +66,7 @@ export let lightTheme = createTheme({
       paper: "#F6EDDE",
     },
     text: {
-      primary: "#C0AD90", // Cor do textPrimary
+      primary: "#634843", // Cor do textPrimary
       secondary: "#796558", // Nova cor para textSecondary
     },
   },
@@ -195,8 +195,8 @@ export let darkTheme = createTheme({
       paper: "#110B09",
     },
     text: {
-      primary: "#968073", // Cor do textPrimary
-      secondary: "#D2BC99", // Nova cor para textSecondary
+      primary: "#C0AD90", // Cor do textPrimary
+      secondary: "#796558", // Nova cor para textSecondary
     },
   },
   typography: {

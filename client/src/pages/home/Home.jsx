@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import prometeuImg from "../../assets/images/prometeomoderno.jpg";
 import NathIcon from "../../assets/icons/nath.png";
 import ShareIcon from "@mui/icons-material/Share";
+
 const Home = () => {
   return (
     <>

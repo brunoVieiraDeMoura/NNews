@@ -12,7 +12,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import ListItemText from "@mui/material/ListItemText";
 import LogoLight from "../assets/LogoLight.png";
 import PropTypes from "prop-types";
@@ -28,6 +28,7 @@ const AppBarComponent = ({ onTheme }) => {
   const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
   const [openSubList, setOpenSubList] = useState(null);
   const [onThemeColor, setOnThemeColor] = useState(false);
+  const navigate = useNavigate();
   const {
     nameTheme,
     setNameTheme,
@@ -112,13 +113,13 @@ const AppBarComponent = ({ onTheme }) => {
         >
           Categorias
         </Typography>
-        <List sx={{ zIndex: 1200, width: "280px" }}>
+        <List sx={{ zIndex: 1200 }}>
           {tabs.map((tab, index) => (
             <div key={index}>
               <ListItemButton
                 sx={{ mt: 1, mb: 1 }}
                 component={RouterLink}
-                to={tab.path}
+                // to={tab.path}
                 onClick={() => handleClick(index)}
               >
                 <ListItemText primary={tab.label} />
@@ -145,7 +146,14 @@ const AppBarComponent = ({ onTheme }) => {
                           to={subItem.path}
                           sx={{ pl: 4 }}
                         >
-                          <ListItemText primary={subItem.label} />
+                          <ListItemText
+                            primary={subItem.label}
+                            onClick={() => {
+                              navigate(RouterLink);
+                              setLeftDrawerOpen(false);
+                              setOpenSubList(false);
+                            }}
+                          />
                         </ListItemButton>
                         <Divider
                           sx={{ background: "rgba(254,248,237,0.1)" }}

@@ -1,12 +1,12 @@
 // hooks/useFetch.js
 import { useState, useEffect } from "react";
 
-export const useFetch = (url, method = "GET", body = null, authreq = false) => {
+const useFetchIn = (url, method = "GET", body = null, authreq = false) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
-  const API_URL = "http://localhost:3000/api";
+  const API_URL = "http://localhost:3000/api/auth";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,3 +53,5 @@ export const useFetch = (url, method = "GET", body = null, authreq = false) => {
 
   return { data, loading, error, status };
 };
+
+export default useFetchIn;

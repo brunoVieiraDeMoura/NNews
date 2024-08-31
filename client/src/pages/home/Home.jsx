@@ -11,14 +11,15 @@ import ShareIcon from "@mui/icons-material/Share";
 
 const Home = () => {
   return (
-    <>
+    <Box>
       <Typography
-        sx={{ mb: 1, fontWeight: "bold" }}
+        sx={{ fontWeight: "bold" }}
         variant="body1"
         color="textSecondary"
       >
         Mais recentes
       </Typography>
+
       <Card
         sx={{
           display: "flex",
@@ -90,7 +91,6 @@ const Home = () => {
           </Typography>
 
           {/* Texto */}
-          <Box></Box>
           <Typography
             variant="body2"
             color="textSecondary"
@@ -118,7 +118,7 @@ const Home = () => {
           {/* Ícone de favoritar */}
         </CardContent>
       </Card>
-    </>
+    </Box>
   );
 };
 

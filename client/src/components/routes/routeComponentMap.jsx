@@ -25,6 +25,7 @@ import MisterioPolicial from "../ListLeft/analise/MisterioPolicial";
 import NegociosEmpreendedorismo from "../ListLeft/analise/NegociosEmpreendedorismo";
 import Romance from "../ListLeft/analise/Romance";
 import Terror from "../ListLeft/analise/Terror";
+import Utopia from "../ListLeft/analise/Utopia";
 
 import Recomendacoes from "../ListLeft/Recomendacoes";
 
@@ -68,6 +69,7 @@ const routeComponentMap = {
   "/analise-literaria/negocios": NegociosEmpreendedorismo,
   "/analise-literaria/romance": Romance,
   "/analise-literaria/terror": Terror,
+  "/analise-literaria/utopia": Utopia,
   "/recomendacoes": Recomendacoes,
   "/recomendacoes/livro-da-semana": LivroDaSemana,
   "/recomendacoes/nao-pode-faltar": NaoPodeFaltar,

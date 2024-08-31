@@ -12,10 +12,20 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import useFetchOut from "./../hooks/useFetchOut";
 
 const SubAppBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const apiCLimaTempo = "da047aaa6450570108abd963b0d88757";
+  const cidade = "Rio de Janeiro";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiCLimaTempo}&units=metric&lang=pt_br`;
+
+  const { data, loading: loadingClima, error: errorClima } = useFetchOut(url);
+
+  if (loadingClima) return <p>Carregando...</p>;
+
+  if (errorClima) return <p> Error: {errorClima} </p>;
 
   const handleSearchClick = () => {
     setSearchOpen(true);
@@ -37,17 +47,83 @@ const SubAppBar = () => {
   return (
     <>
       <AppBar position="relative">
-        <Toolbar>
-          <IconButton color="inherit" onClick={handleSearchClick}>
-            <SearchIcon />
-          </IconButton>
-          <InputBase
-            placeholder="Pesquisar..."
-            value={searchText}
-            onChange={handleSearchChange}
-            style={{ marginLeft: 8, flex: 1 }}
-          />
-        </Toolbar>
+        <Box sx={{ p: 1 }}>
+          <Toolbar
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box
+              sx={{
+                width: {
+                  xs: "50%",
+                  md: "auto",
+                },
+              }}
+            >
+              <IconButton color="inherit" onClick={handleSearchClick}>
+                <SearchIcon />
+              </IconButton>
+              <InputBase
+                placeholder="Pesquisar..."
+                value={searchText}
+                onChange={handleSearchChange}
+                sx={{
+                  marginLeft: 1,
+                  borderRadius: 1,
+                  background: {
+                    xs: "rgba(19,8,1,0.3)",
+                    md: "rgba(19,8,1,0.2)",
+                  },
+                  maxWidth: {
+                    xs: "60%",
+                    md: "80%",
+                  },
+                  width: {
+                    xs: "60%",
+                    md: "300px",
+                  },
+                }}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexwrap: "wrap",
+                justifyContent: "center",
+                flexDirection: "Column",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Typography color="#A3947F" sx={{ fontSize: "14px" }}>
+                  {data.name}
+                </Typography>
+                <Typography color="#A3947F" sx={{ mt: 0.5, fontSize: "12px" }}>
+                  {Math.ceil(data.main.temp)}°C
+                </Typography>
+              </Box>
+              <Typography
+                variant="body2"
+                color="#84755E"
+                sx={{
+                  fontSize: "9px",
+                  textAlign: "center",
+                }}
+              >
+                O clima de hoje é de {data.weather[0].description}.
+              </Typography>
+            </Box>
+          </Toolbar>
+        </Box>
       </AppBar>
 
       {searchOpen && (

@@ -6,9 +6,14 @@ export let lightTheme = createTheme({
   components: {
     MuiInputBase: {
       styleOverrides: {
+        root: {
+          padding: 2,
+        },
         input: {
+          marginLeft: "12px",
           "&::placeholder": {
             color: "#D2BC99",
+            marginLeft: "12px", // Define a margin do placeholder
           },
           color: "#DDC9AC",
         },
@@ -17,7 +22,7 @@ export let lightTheme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          backgroundColor: "rgba(240,227,207,1)",
+          background: "rgba(221,201,172,.2)",
         },
       },
     },
@@ -132,18 +137,23 @@ export let darkTheme = createTheme({
   components: {
     MuiInputBase: {
       styleOverrides: {
+        root: {
+          padding: 2,
+        },
         input: {
+          marginLeft: "12px",
           "&::placeholder": {
-            color: "#F0E3CF",
+            color: "#D2BC99",
+            marginLeft: "12px", // Define a margin do placeholder
           },
-          color: "#2D201A",
+          color: "#DDC9AC",
         },
       },
     },
     MuiDivider: {
       styleOverrides: {
         root: {
-          backgroundColor: "#D2BC99",
+          background: "rgba(221,201,172,.2)",
         },
       },
     },

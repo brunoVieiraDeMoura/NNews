@@ -48,14 +48,28 @@ const Breadcrumb = () => {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <Breadcrumbs aria-label="breadcrumb" sx={{ padding: "20px 0", mt: -3 }}>
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      sx={{
+        display: {
+          xs: pathnames.length === 0 ? "none" : "block",
+          // md: "block",
+        },
+        p: {
+          xs: 2,
+          md: 3,
+        },
+        mt: 0,
+        mb: -2,
+      }}
+    >
       <Link
         underline={pathnames.length === 0 ? "always" : "hover"}
         color={pathnames.length === 0 ? "secondary" : "textSecondary"}
         component={RouterLink}
         to="/"
       >
-        {pathnames.length === 0 ? "Home" : "Home"}
+        {pathnames.length === 0 ? null : "Home"}
       </Link>
       {pathnames.map((value, index) => {
         const last = index === pathnames.length - 1;

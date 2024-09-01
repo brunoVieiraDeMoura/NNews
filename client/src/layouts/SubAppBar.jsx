@@ -47,7 +47,7 @@ const SubAppBar = () => {
   return (
     <>
       <AppBar position="relative">
-        <Box sx={{ p: 1 }}>
+        <Box sx={{ boxShadow: 1, p: 1 }}>
           <Toolbar
             sx={{
               width: "100%",

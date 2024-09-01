@@ -27,7 +27,7 @@ const MainContainer = ({ onTheme }) => {
         <AppBar onTheme={onTheme} />
         <SubAppBar />
       </Box>
-      <Box sx={{ padding: "20px", flex: 1 }}>
+      <Box sx={{ flex: 1 }}>
         <Breadcrumb />
         <Component />
       </Box>

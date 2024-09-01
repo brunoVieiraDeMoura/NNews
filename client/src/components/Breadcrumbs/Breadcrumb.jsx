@@ -1,6 +1,7 @@
 import React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
@@ -48,54 +49,65 @@ const Breadcrumb = () => {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <Breadcrumbs
-      aria-label="breadcrumb"
+    <Box
       sx={{
-        display: {
-          xs: pathnames.length === 0 ? "none" : "block",
-          // md: "block",
-        },
-        p: {
-          xs: 2,
-          md: 3,
-        },
-        mt: 0,
-        mb: -2,
+        display: "flex",
+        width: "100%",
+        justifyContent: "center",
       }}
     >
-      <Link
-        underline={pathnames.length === 0 ? "always" : "hover"}
-        color={pathnames.length === 0 ? "secondary" : "textSecondary"}
-        component={RouterLink}
-        to="/"
-      >
-        {pathnames.length === 0 ? null : "Home"}
-      </Link>
-      {pathnames.map((value, index) => {
-        const last = index === pathnames.length - 1;
-        const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        sx={{
+          width: "100%",
+          maxWidth: "1300px",
 
-        return last ? (
-          <Typography
-            sx={{ textDecoration: "underline" }}
-            color="secondary"
-            key={to}
-          >
-            {breadcrumbNameMap[to]}
-          </Typography>
-        ) : (
-          <Link
-            underline="hover"
-            color="textSecondary"
-            component={RouterLink}
-            to={to}
-            key={to}
-          >
-            {breadcrumbNameMap[to]}
-          </Link>
-        );
-      })}
-    </Breadcrumbs>
+          display: {
+            xs: pathnames.length === 0 ? "none" : "flex",
+            // md: "block",
+          },
+          p: {
+            xs: 2,
+            md: 3,
+          },
+          mt: 0,
+          mb: -2,
+        }}
+      >
+        <Link
+          underline={pathnames.length === 0 ? "always" : "hover"}
+          color={pathnames.length === 0 ? "secondary" : "textSecondary"}
+          component={RouterLink}
+          to="/"
+        >
+          {pathnames.length === 0 ? null : "Home"}
+        </Link>
+        {pathnames.map((value, index) => {
+          const last = index === pathnames.length - 1;
+          const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+
+          return last ? (
+            <Typography
+              sx={{ textDecoration: "underline" }}
+              color="secondary"
+              key={to}
+            >
+              {breadcrumbNameMap[to]}
+            </Typography>
+          ) : (
+            <Link
+              underline="hover"
+              color="textSecondary"
+              component={RouterLink}
+              to={to}
+              key={to}
+            >
+              {breadcrumbNameMap[to]}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+    </Box>
   );
 };
 

@@ -46,8 +46,8 @@ export let lightTheme = createTheme({
       xs: 0,
       sm: 600,
       md: 960,
-      lg: 1280,
-      xl: 1600,
+      lg: 1100,
+      xl: 1280,
     },
   },
   palette: {
@@ -113,7 +113,9 @@ export let lightTheme = createTheme({
     },
     h6: {
       fontFamily: "Lora",
-      color: "#DDC9AC",
+      color: "#2D201A",
+      lineHeight: "1.125",
+      fontWeight: "500",
     },
     body1: {
       fontFamily: "Open Sans",
@@ -180,8 +182,8 @@ export let darkTheme = createTheme({
       xs: 0,
       sm: 600,
       md: 960,
-      lg: 1280,
-      xl: 1600,
+      lg: 1100,
+      xl: 1280,
     },
   },
   palette: {

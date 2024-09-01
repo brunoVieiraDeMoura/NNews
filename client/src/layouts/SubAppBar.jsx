@@ -27,10 +27,6 @@ const SubAppBar = () => {
 
   if (errorClima) return <p> Error: {errorClima} </p>;
 
-  const handleSearchClick = () => {
-    setSearchOpen(true);
-  };
-
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
     if (event.target.value !== "") {
@@ -46,8 +42,16 @@ const SubAppBar = () => {
 
   return (
     <>
-      <AppBar position="relative">
-        <Box sx={{ boxShadow: 1, p: 1 }}>
+      <AppBar
+        sx={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        position="relative"
+      >
+        <Box sx={{ boxShadow: 1, p: 1, width: "100%", maxWidth: "1300px" }}>
           <Toolbar
             sx={{
               width: "100%",
@@ -63,7 +67,7 @@ const SubAppBar = () => {
                 },
               }}
             >
-              <IconButton color="inherit" onClick={handleSearchClick}>
+              <IconButton color="inherit">
                 <SearchIcon />
               </IconButton>
               <InputBase
@@ -131,221 +135,181 @@ const SubAppBar = () => {
           <Box
             sx={{
               position: "absolute",
-              top: "120px",
+              top: {
+                xs: "126px",
+              },
+              height: "200vh",
               left: 0,
               right: 0,
               zIndex: 1200,
               bgcolor: "background.paper",
-              borderRadius: 1,
+              // borderRadius: 1,
               boxShadow: 3,
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
               p: 2,
             }}
           >
-            <IconButton
-              edge="end"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-              sx={{ position: "absolute", right: 8, top: 8 }}
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "1300px",
+                justifyContent: "center",
+                // background: "red",
+              }}
             >
-              <CloseIcon />
-            </IconButton>
-            {/* Resultados da pesquisa */}
-            <Typography variant="h6">Procurando resultados...</Typography>
-            <Box>
-              <Box sx={{ mt: 2 }}>
-                <Skeleton
-                  sx={{ borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={120}
-                />
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                </Box>
-                <Skeleton
-                  sx={{ mt: 1, borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={16}
-                />
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+                sx={{ position: "absolute", right: 8, top: 8 }}
+              >
+                <CloseIcon />
+              </IconButton>
+              {/* Resultados da pesquisa */}
+              <Typography variant="h6">Procurando resultados...</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "Column",
+                  justifyContent: "center",
+                  width: "100%",
+                  alignItems: "center",
+                }}
+              >
                 <Box
                   sx={{
                     display: "flex",
-                    justifyContent: "space-between",
-                    gap: 1,
+                    flexDirection: "Column",
+                    justifyContent: "center",
+                    width: {
+                      xs: "100%",
+                      md: "40%",
+                    },
                   }}
                 >
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="100%"
-                    height={32}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={32}
-                  />
-                </Box>
-              </Box>
-              <Divider sx={{ mt: 2, mb: 2 }} />
-              <Box sx={{}}>
-                <Skeleton
-                  sx={{ borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={120}
-                />
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                </Box>
-                <Skeleton
-                  sx={{ mt: 1, borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={16}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 1,
-                  }}
-                >
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="100%"
-                    height={32}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={32}
-                  />
-                </Box>
-              </Box>
-              <Divider sx={{ mt: 2, mb: 2 }} />
-              <Box sx={{}}>
-                <Skeleton
-                  sx={{ borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={120}
-                />
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                </Box>
-                <Skeleton
-                  sx={{ mt: 1, borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={16}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 1,
-                  }}
-                >
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="100%"
-                    height={32}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={32}
-                  />
-                </Box>
-              </Box>
-              <Divider sx={{ mt: 2, mb: 2 }} />
-              <Box sx={{}}>
-                <Skeleton
-                  sx={{ borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={120}
-                />
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={16}
-                  />
-                </Box>
-                <Skeleton
-                  sx={{ mt: 1, borderRadius: 1 }}
-                  variant="rectangular"
-                  width="100%"
-                  height={16}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 1,
-                  }}
-                >
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="100%"
-                    height={32}
-                  />
-                  <Skeleton
-                    sx={{ mt: 1, borderRadius: 1 }}
-                    variant="rectangular"
-                    width="10%"
-                    height={32}
-                  />
+                  <Box sx={{ mt: 2 }}>
+                    <Skeleton
+                      sx={{ borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={120}
+                    />
+                    <Box sx={{ display: "flex", gap: 1 }}></Box>
+                    <Skeleton
+                      sx={{ mt: 1, borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={16}
+                    />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 1,
+                      }}
+                    >
+                      <Skeleton
+                        sx={{ mt: 1, borderRadius: 1 }}
+                        variant="rectangular"
+                        width="100%"
+                        height={32}
+                      />
+                    </Box>
+                  </Box>
+                  <Divider sx={{ mt: 2, mb: 2 }} />
+                  <Box sx={{}}>
+                    <Skeleton
+                      sx={{ borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={120}
+                    />
+                    <Box sx={{ display: "flex", gap: 1 }}></Box>
+                    <Skeleton
+                      sx={{ mt: 1, borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={16}
+                    />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 1,
+                      }}
+                    >
+                      <Skeleton
+                        sx={{ mt: 1, borderRadius: 1 }}
+                        variant="rectangular"
+                        width="100%"
+                        height={32}
+                      />
+                    </Box>
+                  </Box>
+                  <Divider sx={{ mt: 2, mb: 2 }} />
+                  <Box sx={{}}>
+                    <Skeleton
+                      sx={{ borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={120}
+                    />
+                    <Box sx={{ display: "flex", gap: 1 }}></Box>
+                    <Skeleton
+                      sx={{ mt: 1, borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={16}
+                    />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 1,
+                      }}
+                    >
+                      <Skeleton
+                        sx={{ mt: 1, borderRadius: 1 }}
+                        variant="rectangular"
+                        width="100%"
+                        height={32}
+                      />
+                    </Box>
+                  </Box>
+                  <Divider sx={{ mt: 2, mb: 2 }} />
+                  <Box sx={{}}>
+                    <Skeleton
+                      sx={{ borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={120}
+                    />
+                    <Box sx={{ display: "flex", gap: 1 }}></Box>
+                    <Skeleton
+                      sx={{ mt: 1, borderRadius: 1 }}
+                      variant="rectangular"
+                      width="100%"
+                      height={16}
+                    />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 1,
+                      }}
+                    >
+                      <Skeleton
+                        sx={{ mt: 1, borderRadius: 1 }}
+                        variant="rectangular"
+                        width="100%"
+                        height={32}
+                      />
+                    </Box>
+                  </Box>
                 </Box>
               </Box>
             </Box>

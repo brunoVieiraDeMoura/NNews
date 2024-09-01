@@ -19,11 +19,14 @@ const MainContainer = ({ onTheme }) => {
       sx={{
         display: "flex",
         flexDirection: "Column",
-        // justifyContent: "space-between",
         minHeight: "100vh",
       }}
     >
-      <Box>
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
         <AppBar onTheme={onTheme} />
         <SubAppBar />
       </Box>
@@ -31,7 +34,7 @@ const MainContainer = ({ onTheme }) => {
         <Breadcrumb />
         <Component />
       </Box>
-      <Footer />
+      <Footer sx={{ width: "100%" }} />
     </Box>
   );
 };

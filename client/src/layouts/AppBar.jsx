@@ -72,8 +72,22 @@ const AppBarComponent = ({ onTheme }) => {
   const userOptions = userOptionsList;
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar
+        sx={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+        position="static"
+      >
+        <Toolbar
+          sx={{
+            width: "100%",
+            maxWidth: "1300px",
+            justifyContent: "space-between",
+          }}
+        >
           <IconButton
             edge="start"
             color="inherit"
@@ -82,7 +96,15 @@ const AppBarComponent = ({ onTheme }) => {
             <MenuIcon sx={{ fontSize: "32px" }} />
           </IconButton>
           <IconButton
-            sx={{ flex: 1 }}
+            sx={{
+              p: 2,
+              width: {
+                xs: "100px",
+                md: "250px",
+              },
+              height: "35px",
+              borderRadius: 0,
+            }}
             edge="start"
             color="inherit"
             aria-label="logo"
@@ -106,14 +128,18 @@ const AppBarComponent = ({ onTheme }) => {
         open={leftDrawerOpen}
         onClose={toggleLeftDrawer(false)}
       >
-        <Typography
-          sx={{ textAlign: "center", p: 2 }}
-          variant="h2"
-          color="primary.light"
-        >
+        <Typography sx={{ p: 2 }} variant="h4" color="primary.light">
           Categorias
         </Typography>
-        <List sx={{ zIndex: 1200 }}>
+        <List
+          sx={{
+            zIndex: 1200,
+            width: {
+              xs: "280px",
+              md: "300px",
+            },
+          }}
+        >
           {tabs.map((tab, index) => (
             <div key={index}>
               <ListItemButton
@@ -177,16 +203,15 @@ const AppBarComponent = ({ onTheme }) => {
         open={rightDrawerOpen}
         onClose={toggleRightDrawer(false)}
       >
-        <Typography
-          sx={{ textAlign: "center", p: 2 }}
-          variant="h2"
-          color="primary.light"
-        >
+        <Typography sx={{ p: 2 }} variant="h4" color="primary.light">
           Perfil
         </Typography>
         <List
           sx={{
-            width: "280px",
+            width: {
+              xs: "200px",
+              md: "300px",
+            },
           }}
         >
           {userOptions.map((option, index) => (

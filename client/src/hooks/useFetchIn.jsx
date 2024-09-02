@@ -1,57 +1,62 @@
-// hooks/useFetch.js
-import { useState, useEffect } from "react";
+// hooks/useFetchIn.js
+import { useState } from "react";
 
-const useFetchIn = (url, method = "GET", body = null, authreq = false) => {
+const API_URL = "http://localhost:3000/api/auth";
+
+const useFetchIn = () => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
-  const API_URL = "http://localhost:3000/api/auth";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = authreq ? localStorage.getItem("token") : null;
-        const headers = {
-          "Content-Type": "application/json",
-          ...(authreq && token ? { Authorization: `Bearer ${token}` } : {}),
-        };
+  const fetchData = async (
+    url,
+    method = "GET",
+    body = null,
+    authreq = false,
+  ) => {
+    setLoading(true);
+    setError(null);
+    setStatus(null);
 
-        const options = {
-          method,
-          headers,
-          body: body ? JSON.stringify(body) : null,
-        };
+    try {
+      const token = authreq ? localStorage.getItem("token") : null;
+      const headers = {
+        "Content-Type": "application/json",
+        ...(authreq && token ? { Authorization: `Bearer ${token}` } : {}),
+      };
 
-        const response = await fetch(API_URL + url, options);
-        setStatus(response.status);
+      const response = await fetch(API_URL + url, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : null,
+      });
 
-        if (!response.ok) {
-          const errorDetails = await response.json();
-          throw new Error(
-            errorDetails.message ||
-              `Error ${response.status}: ${response.statusText}`,
-          );
-        }
+      setStatus(response.status);
 
-        const result = await response.json();
-        setData(result);
-      } catch (err) {
-        const errorMessage = err.message.includes(
-          "A conexão coma a internet falou.",
-        )
-          ? `Server Error: ${err.message}`
-          : `Fetch Error: ${err.message}`;
-        setError(errorMessage);
-      } finally {
-        setLoading(false);
+      let result;
+      const contentType = response.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        result = await response.json(); // Analisar como JSON
+      } else {
+        result = await response.text(); // Analisar como texto
       }
-    };
 
-    fetchData();
-  }, [url, method, body, authreq]);
+      if (!response.ok) {
+        throw new Error(result.msg || result || "Algo deu errado.");
+      }
 
-  return { data, loading, error, status };
+      setData(result);
+    } catch (err) {
+      setError(err.message);
+      console.error("Erro ao fazer fetch:", err.message, err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { data, loading, error, status, fetchData };
 };
 
 export default useFetchIn;

@@ -1,3 +1,4 @@
+// hooks/useForm.js
 import { useState } from "react";
 
 const types = {
@@ -8,64 +9,55 @@ const types = {
   },
   password: {
     regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    message: "A senha deve conter no minimo 1 letra e ao menos 8 caractéres.",
+    message:
+      "A senha deve conter no mínimo 8 caracteres, incluindo letras e números.",
   },
   passwordDiferente: {
     regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    booliano: true,
-    message: "As senhas precisam ser identicas.",
+    message: "As senhas precisam ser idênticas.",
   },
   phone: {
     regex:
       /^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/,
-    message: "Digite um número de celular válido",
+    message: "Digite um número de celular válido.",
   },
 };
 
 const useForm = (type) => {
   const [value, setValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [error, setError] = useState("");
 
   const validate = (value) => {
-    if (type === false) return true;
-    if (value.length === 0) {
-      setErrorMessage("Este campo deve ser prenchido.");
+    if (!type) return true;
+    if (value.trim() === "") {
+      setError("Este campo é obrigatório.");
       return false;
-    } else if (
-      types[type] &&
-      types[type].booliano &&
-      !types[type].regex.test(value)
-    ) {
-      setErrorMessage(types[type].message);
-      return false;
-    } else if (
-      types[type] &&
-      types[type].regex &&
-      !types[type].regex.test(value)
-    ) {
-      setErrorMessage(types[type].message);
+    } else if (types[type] && !types[type].regex.test(value)) {
+      setError(types[type].message);
       return false;
     } else {
-      setErrorMessage(null);
+      setError("");
       return true;
     }
   };
 
-  const onChange = ({ target }) => {
-    if (errorMessage) {
-      validate(target.value);
-      setErrorMessage(null);
-    }
-    setValue(target.value);
+  const onChange = (event) => {
+    if (error) validate(event.target.value);
+    setValue(event.target.value);
+  };
+
+  const onBlur = () => {
+    validate(value);
   };
 
   return {
     value,
-    setValue,
     onChange,
-    errorMessage,
+    onBlur,
+    error,
+    helperText: error || "",
     validate: () => validate(value),
-    onBlur: () => validate(value),
+    setValue,
   };
 };
 

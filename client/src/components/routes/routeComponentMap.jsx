@@ -43,6 +43,7 @@ import Escritores from "../ListLeft/Escritores";
 
 import Perfil from "./../ListRight/Perfil";
 import Settings from "./../ListRight/Settings";
+import Entrar from "../../pages/register/Entrar";
 
 const routeComponentMap = {
   "/analise-literaria": AnalisesLiterarias,
@@ -82,6 +83,7 @@ const routeComponentMap = {
   "/perfil": Perfil,
   "/configuracoes": Settings,
   "/notfound": NotFound,
+  "/entrar": Entrar,
 };
 
 export default routeComponentMap;

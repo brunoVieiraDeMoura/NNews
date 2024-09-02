@@ -8,19 +8,15 @@ const validateEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-const validatePhone = (phone) => {
-  const re =
-    /^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/;
-  return re.test(String(phone));
-};
-
 const validatePassword = (password) => {
   const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
   return re.test(String(password));
 };
 
 export const registerUser = async (req, res) => {
-  const { name, email, phone, password, confirmPassword } = req.body;
+  console.log("Dados recebidos no backend:", req.body);
+
+  const { name, email, password, confirmPassword } = req.body;
 
   const errors = [];
 
@@ -43,20 +39,17 @@ export const registerUser = async (req, res) => {
     });
   }
 
-  if (!phone) {
-    errors.push({ field: "phone", message: "Telefone necessário" });
-  } else if (!validatePhone(phone)) {
-    errors.push({ field: "phone", message: "Telefone Inválido (Regex)" });
-  }
-
-  // Se houver erros, retorna a lista de erros
   if (errors.length > 0) {
+    console.log("Erros de validação:", errors);
     return res.status(400).json({ errors });
   }
 
   try {
     let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ msg: "Usuário já existente." });
+    if (user) {
+      console.log("Usuário já existente.");
+      return res.status(400).json({ msg: "Usuário já existente." });
+    }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -64,15 +57,17 @@ export const registerUser = async (req, res) => {
     user = new User({
       name,
       email,
-      phone,
       password: hashedPassword,
     });
 
     await user.save();
-    return res.status(201).json({ msg: "Usuário Registrado" });
+    console.log("Sucesso! Usuário cadastrado com sucesso.");
+    return res
+      .status(201)
+      .json({ msg: "Sucesso! Usuário cadastrado com sucesso." });
   } catch (err) {
     console.error(err.message);
-    return res.status(500).send("Erro server fetch (Registro)");
+    return res.status(500).send("Error ao tentar cadastrar o usuário.");
   }
 };
 

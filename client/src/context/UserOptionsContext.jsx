@@ -17,6 +17,11 @@ export const UserOptionsContextProvider = ({ children }) => {
 
   const userOptionsList = [
     {
+      label: "Entrar / Cadastrar",
+      icon: <AccountBoxIcon sx={{ color: colorIcon }} />,
+      path: "/entrar",
+    },
+    {
       label: "Perfil",
       icon: <AccountBoxIcon sx={{ color: colorIcon }} />,
       path: "/perfil",

@@ -278,8 +278,6 @@ const Home = () => {
                     }}
                   />
                   <Box
-                    component="a"
-                    href="/"
                     sx={{
                       textDecoration: "none",
                       display: "flex",
@@ -287,10 +285,27 @@ const Home = () => {
                       gap: 1,
                     }}
                   >
-                    <Typography variant="body1">
+                    <Link
+                      variant="body1"
+                      color="textSecondary"
+                      underline="hover"
+                      component="a"
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => {
+                        navigate(materiaMaisRecente.linkPerfilEscritora);
+                      }}
+                    >
                       {materiaMaisRecente.nomeEscritora}
-                    </Typography>
-                    <ShareIcon />
+                    </Link>
+                    <Box
+                      component="a"
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                      onClick={() => {
+                        navigate(materiaMaisRecente.linkCompartilharMateria);
+                      }}
+                    >
+                      <ShareIcon />
+                    </Box>
                   </Box>
                 </Box>
                 <Box>
@@ -366,7 +381,7 @@ const Home = () => {
               }}
             >
               <Typography variant="body2" color="textSecondary">
-                Veja Todos
+                Veja Todas
               </Typography>
               <ArrowForwardIosIcon sx={{ fontSize: "1rem" }} />
             </Button>
@@ -453,18 +468,30 @@ const Home = () => {
                   {/* Links pequenos à esquerda */}
                   <Box sx={{ display: "flex", gap: 1, ml: 6, mt: -1.5 }}>
                     <Link
-                      href="#"
                       variant="body2"
                       underline="hover"
                       color="textSecondary"
+                      sx={{
+                        cursor: "pointer",
+                        textDecoration: {
+                          xs: "underline",
+                          md: "none",
+                        },
+                      }}
+                      onClick={() => {
+                        navigate(materiaMaisRecente.linkPerfilEscritora);
+                      }}
                     >
                       {slide.nomeEscritora}
                     </Link>
                     <Link
-                      href="#"
                       variant="body2"
                       underline="hover"
+                      sx={{ cursor: "pointer" }}
                       color="textSecondary"
+                      onClick={() => {
+                        navigate(materiaMaisRecente.linkCompartilharMateria);
+                      }}
                     >
                       <ShareIcon sx={{ fontSize: "18px" }} />
                     </Link>

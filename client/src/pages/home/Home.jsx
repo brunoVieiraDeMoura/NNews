@@ -249,6 +249,7 @@ const Home = () => {
                   backgroundImage: `url(${materiaMaisRecente.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                  cursor: "pointer",
                 }}
               ></Box>
               <Box
@@ -435,6 +436,7 @@ const Home = () => {
                       component="img"
                       height="140"
                       image={slide.image}
+                      sx={{ cursor: "pointer" }}
                       alt="Notícia"
                     />
                   </Box>
@@ -498,13 +500,7 @@ const Home = () => {
                   </Box>
 
                   {/* Título */}
-                  <Box
-                    component="a"
-                    onClick={() => {
-                      navigate(slide.linkMateria);
-                    }}
-                    sx={{ textDecoration: "none" }}
-                  >
+                  <Box sx={{ textDecoration: "none" }}>
                     <Typography
                       variant="h5"
                       component="div"

@@ -229,10 +229,10 @@ export let darkTheme = createTheme({
             },
           },
           "& .MuiInputLabel-root": {
-            color: colors.dark.Marrom[1], // Cor do label
+            color: colors.dark.bege[1], // Cor do label
           },
           "& .MuiFormHelperText-root": {
-            color: "", // Cor do texto de ajuda
+            color: colors.dark.bege[1], // Cor do texto de ajuda
           },
         },
       },
@@ -267,6 +267,7 @@ export let darkTheme = createTheme({
       },
     },
   },
+
   MuiBox: {
     styleOverrides: {
       root: {
@@ -277,6 +278,7 @@ export let darkTheme = createTheme({
       },
     },
   },
+
   breakpoints: {
     values: {
       xs: 0,
@@ -315,6 +317,7 @@ export let darkTheme = createTheme({
     button: {
       textTransform: "",
       fontFamily: "Open Sans",
+      color: colors.dark.bege[1],
       fontWeight: "600",
     },
     fontFamily: "Lora",

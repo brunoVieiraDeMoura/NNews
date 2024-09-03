@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { UserOptionsContext } from "../context/UserOptionsContext.jsx";
+import { AuthContext } from "../context/AuthContext";
 
 const AppBarComponent = ({ onTheme }) => {
   const [leftDrawerOpen, setLeftDrawerOpen] = useState(false);
@@ -38,7 +39,7 @@ const AppBarComponent = ({ onTheme }) => {
     setIconTheme,
   } = useContext(UserOptionsContext);
   const { goToHome } = useNavigation();
-
+  const { user } = useContext(AuthContext);
   const toggleTheme = () => {
     setOnThemeColor((onThemeColor) => !onThemeColor);
     setNameTheme(onThemeColor ? "Modo Escuro" : "Modo Claro");
@@ -70,6 +71,23 @@ const AppBarComponent = ({ onTheme }) => {
 
   const tabs = routeTabList;
   const userOptions = userOptionsList;
+  function formatName(fullName) {
+    const nameParts = fullName.trim().split(" ");
+    // Se só tem um nome, retorna apenas ele
+    if (nameParts.length === 1) {
+      return nameParts[0];
+    }
+    // Se tem mais de um nome, retorna o primeiro e o último
+    const firstName = nameParts[0];
+    const lastName = nameParts[nameParts.length - 1];
+
+    // Evita o caso de repetir o mesmo nome
+    if (firstName.toLowerCase() === lastName.toLowerCase()) {
+      return firstName;
+    }
+    return `${firstName} ${lastName}`;
+  }
+
   return (
     <>
       <AppBar
@@ -117,7 +135,26 @@ const AppBarComponent = ({ onTheme }) => {
             color="inherit"
             onClick={toggleRightDrawer(true)}
           >
-            <AccountCircleIcon sx={{ fontSize: "32px" }} />
+            {user ? (
+              <Box
+                sx={{
+                  borderRadius: "50%",
+                  width: {
+                    xs: "32px",
+                    md: "40px",
+                  },
+                  height: {
+                    xs: "32px",
+                    md: "40px",
+                  },
+                  backgroundImage: `url(${user.picture})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            ) : (
+              <AccountCircleIcon sx={{ fontSize: "32px" }} />
+            )}
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -203,9 +240,18 @@ const AppBarComponent = ({ onTheme }) => {
         open={rightDrawerOpen}
         onClose={toggleRightDrawer(false)}
       >
-        <Typography sx={{ p: 2 }} variant="h4" color="primary.light">
-          Perfil
-        </Typography>
+        <Box sx={{ p: 2 }}>
+          <Typography gutterBottom variant="h4" color="primary.light">
+            Perfil
+          </Typography>
+          {user ? (
+            <Typography variant="h5" color="textSecondary">
+              {formatName(user.name)}
+            </Typography>
+          ) : (
+            <></>
+          )}
+        </Box>
         <List
           sx={{
             width: {

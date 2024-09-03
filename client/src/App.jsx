@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home.jsx";
 import MainContainer from "./layouts/MainContainer.jsx";
 import { UserOptionsContextProvider } from "./context/userOptionsContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -15,19 +17,22 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <CssBaseline />
-
-      <Router>
-        <UserOptionsContextProvider>
-          <MainContainer onTheme={toggleTheme}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </MainContainer>
-        </UserOptionsContextProvider>
-      </Router>
-    </ThemeProvider>
+    <GoogleOAuthProvider clientId="333111812961-i21pl4u6h20oe9egblhj8nnvc5ef6cbv.apps.googleusercontent.com">
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <CssBaseline />
+        <Router>
+          <AuthProvider>
+            <UserOptionsContextProvider>
+              <MainContainer onTheme={toggleTheme}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                </Routes>
+              </MainContainer>
+            </UserOptionsContextProvider>
+          </AuthProvider>
+        </Router>
+      </ThemeProvider>
+    </GoogleOAuthProvider>
   );
 };
 

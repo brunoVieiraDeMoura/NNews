@@ -4,19 +4,40 @@ import Typography from "@mui/material/Typography";
 import objectSlideList from "../../../util/objectSlideList";
 
 const JornalismoLiterario = () => {
-  // Obtém o primeiro objeto de objectSlideList ou um objeto padrão
-  const materiaId = objectSlideList[1] || {
+  const materiaId = objectSlideList[2] || {
     textos: [],
     titulo: "",
     subTitle: "",
     image: "",
   };
 
+  // Separar textos em duas partes: os dois primeiros (texto1 e texto2) e o resto
+  const [primeirosTextos, restantesTextos] = materiaId.textos.reduce(
+    ([primeiros, restantes], textoObj) => {
+      const novosPrimeiros = { ...primeiros };
+      const novosRestantes = { ...textoObj };
+
+      Object.entries(textoObj).forEach(([key, value]) => {
+        if (key === "texto1" || key === "texto2") {
+          novosPrimeiros[key] = value;
+          delete novosRestantes[key];
+        }
+      });
+
+      if (Object.keys(novosRestantes).length > 0) {
+        restantes.push(novosRestantes);
+      }
+
+      return [novosPrimeiros, restantes];
+    },
+    [{}, []],
+  );
+
   return (
     <Box
       sx={{
         display: "flex",
-        flexDirection: "Column",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
@@ -34,7 +55,7 @@ const JornalismoLiterario = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "Column",
+          flexDirection: "column",
           p: {
             xs: 0,
             md: 3,
@@ -50,71 +71,104 @@ const JornalismoLiterario = () => {
             lg: "70%",
             xl: "60%",
           },
+          maxWidth: {
+            xl: "800px",
+          },
         }}
       >
-        {/* Título da matéria */}
         <Typography gutterBottom variant="h4">
           {materiaId.titulo}
         </Typography>
 
-        {/* Subtítulo da matéria */}
         <Typography variant="h6">{materiaId.subTitle}</Typography>
 
-        {/* Imagem de fundo da matéria */}
-        <Box>
+        {/* Container para a imagem e os textos 1 e 2 */}
+        <Box
+          sx={{
+            display: {
+              xs: "block",
+              md: "grid",
+            },
+            gridTemplateColumns: {
+              md: "2fr 3fr",
+            },
+            gap: 2,
+            mt: {
+              xs: 1,
+              md: 2,
+            },
+          }}
+        >
+          {/* Imagem */}
           <Box
-            key={materiaId.index}
             sx={{
-              display: "grid",
-              gridTemplateColumns: "1fr 2fr",
               borderRadius: 1,
               width: "100%",
-              mt: 1,
               height: {
                 xs: "200px",
-                md: "400px",
+                md: "100%",
               },
               backgroundImage: `url(${materiaId.image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           />
-          <Typography>{materiaId.textos[0].texto1}</Typography>
+
+          {/* Container para texto1 e texto2 */}
+          <Box>
+            {Object.entries(primeirosTextos).map(([key, value]) => (
+              <Typography
+                key={key}
+                variant="body1"
+                sx={{
+                  mt: {
+                    xs: 2,
+                    md: 0,
+                  },
+                  "& + &": {
+                    mt: {
+                      md: 2,
+                    },
+                  },
+                }}
+              >
+                {value}
+              </Typography>
+            ))}
+          </Box>
         </Box>
-        {/* Renderiza os textos da matéria */}
-        {materiaId.textos &&
-          Array.isArray(materiaId.textos) &&
-          materiaId.textos.map((textoObj, index) => (
-            <Box key={index} sx={{ mt: 2 }}>
-              {Object.entries(textoObj).map(([key, value]) => {
-                if (key.startsWith("texto")) {
-                  return (
-                    <Typography key={key} variant="body1" sx={{ mt: 2 }}>
-                      {value}
-                    </Typography>
-                  );
-                } else if (key.startsWith("comment")) {
-                  return (
-                    <Typography
-                      key={key}
-                      variant="body2"
-                      sx={{ mt: 2, fontStyle: "italic", textAlign: "center" }}
-                    >
-                      {value}
-                    </Typography>
-                  );
-                } else if (key.startsWith("subText")) {
-                  return (
-                    <Typography key={key} variant="h6" sx={{ mt: 2 }}>
-                      {value}
-                    </Typography>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-            </Box>
-          ))}
+
+        {/* Renderiza os textos restantes, excluindo texto1 e texto2 */}
+        {restantesTextos.map((textoObj, index) => (
+          <Box key={index}>
+            {Object.entries(textoObj).map(([key, value]) => {
+              if (key.startsWith("texto")) {
+                return (
+                  <Typography key={key} variant="body1" sx={{ mt: 2 }}>
+                    {value}
+                  </Typography>
+                );
+              } else if (key.startsWith("comment")) {
+                return (
+                  <Typography
+                    key={key}
+                    variant="body2"
+                    sx={{ mt: 2, fontStyle: "italic", textAlign: "center" }}
+                  >
+                    {value}
+                  </Typography>
+                );
+              } else if (key.startsWith("subText")) {
+                return (
+                  <Typography key={key} variant="h6" sx={{ mt: 2 }}>
+                    {value}
+                  </Typography>
+                );
+              }
+              return null;
+            })}
+          </Box>
+        ))}
 
         {/* Exibe a dica ao final */}
         {materiaId.textos &&

@@ -5,6 +5,9 @@ import {
   loginUser,
   googleLogin,
   validateToken,
+  updateProfile,
+  getUserProfile,
+  updateUser,
 } from "../../controllers/auth/authController.js";
 import jwt from "jsonwebtoken";
 import User from "../../models/User.js";
@@ -100,5 +103,24 @@ router.post("/google/callback", async (req, res) => {
     return res.status(500).json({ msg: "Erro no login com Google" });
   }
 });
+
+// Rota Put Perfil para adicionar textos e informações do Perfil
+router.put(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  updateProfile,
+);
+// Rota get Perfil para puxar textos e informações do Perfil
+router.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  getUserProfile, // Utilize a função getUserProfile
+);
+// Rota Put Perfil para alterar os dados do Perfil
+router.put(
+  "/update-profile",
+  passport.authenticate("jwt", { session: false }),
+  updateUser, // Função que vamos criar para atualizar os dados do usuário
+);
 
 export default router;

@@ -1,7 +1,11 @@
-// config/passport.js
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import User from "../models/User.js";
+
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWT_SECRET; // Certifique-se de que você tem uma variável JWT_SECRET no .env
 
 passport.use(
   new GoogleStrategy(
@@ -30,12 +34,32 @@ passport.use(
   ),
 );
 
+passport.use(
+  new JwtStrategy(opts, async (jwt_payload, done) => {
+    try {
+      const user = await User.findById(jwt_payload.id);
+      if (user) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    } catch (err) {
+      return done(err, false);
+    }
+  }),
+);
+
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
 
 export default passport;

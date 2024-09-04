@@ -24,6 +24,17 @@ const UserSchema = new mongoose.Schema({
   picture: {
     type: String,
   },
+  perfil: {
+    description: { type: String, default: "" },
+    favoriteBooks: { type: [String], default: ["", "", ""] },
+    readingRecommendations: { type: [String], default: [""] },
+    link: { type: String, default: "" },
+    socialLinks: {
+      facebook: { type: String, default: "" },
+      twitter: { type: String, default: "" },
+      linkedin: { type: String, default: "" },
+    },
+  },
 });
 
 const User = mongoose.model("User", UserSchema);

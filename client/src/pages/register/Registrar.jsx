@@ -156,6 +156,7 @@ const Registrar = ({ onItemClick }) => {
         }}
       >
         <Box
+          className="animate__animated animate__rubberBand"
           sx={{
             mt: {
               xs: 2,
@@ -213,9 +214,14 @@ const Registrar = ({ onItemClick }) => {
         </Box>
 
         <Container
+          className="animate__animated animate__fadeIn"
           sx={{
             display: {
               xs: "flex",
+            },
+            mt: {
+              xs: 1,
+              md: 0,
             },
             order: {
               xs: "1",

@@ -43,7 +43,7 @@ const breadcrumbNameMap = {
   "/perfil": "Perfil",
   "/configuracoes": "Configurações",
   "/entrar": "Entrar",
-  "/dashboard": "Dashboard",
+  "/dashboard": "Perfil",
 };
 
 const Breadcrumb = () => {

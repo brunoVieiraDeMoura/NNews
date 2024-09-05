@@ -1,18 +1,21 @@
 import express from "express";
-import { corsMiddleware } from "./middlewares/corsMiddleware.js";
-import { bodyParserMiddleware } from "./middlewares/bodyParserMiddleware.js";
 import authRoutes from "./routes/auth/authRoutes.js";
 import connectDB from "./config/db.js";
+import bodyParser from "body-parser";
+import cors from "cors";
 import path from "path";
 import passport from "./config/passport.js";
+
+import { bodyParserMiddleware } from "./middlewares/bodyParserMiddleware.js";
+
 const app = express();
 
 connectDB();
 
-// Middleware
-app.use(passport.initialize());
-app.use(corsMiddleware);
+app.use(bodyParser.json());
 app.use(bodyParserMiddleware);
+app.use(passport.initialize());
+app.use(cors());
 
 app.use("/api/auth", authRoutes);
 

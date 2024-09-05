@@ -9,6 +9,8 @@ import MainContainer from "./layouts/MainContainer.jsx";
 import { UserOptionsContextProvider } from "./context/userOptionsContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import ScrollToTop from "./util/scrollTop";
+import "animate.css";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -21,6 +23,7 @@ const App = () => {
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <Router>
+          <ScrollToTop />
           <AuthProvider>
             <UserOptionsContextProvider>
               <MainContainer onTheme={toggleTheme}>

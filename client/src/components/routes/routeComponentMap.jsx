@@ -42,11 +42,11 @@ import ReflexivoAuto from "../ListLeft/textos/ReflexivoAuto";
 import Escritores from "../ListLeft/Escritores";
 
 import Perfil from "./../ListRight/Perfil";
-import Settings from "./../ListRight/Settings";
 
 import Dashboard from "../../pages/dashboard/Dashboard";
 import Entrar from "./../../pages/register/Entrar";
 import Registrar from "./../../pages/register/Registrar";
+import ListDashBoard from "../../pages/editList/ListDashBoard";
 
 const routeComponentMap = {
   "/analise-literaria": AnalisesLiterarias,
@@ -84,7 +84,7 @@ const routeComponentMap = {
   "/textos/reflexivo": ReflexivoAuto,
   "/escritores": Escritores,
   "/perfil": Perfil,
-  "/configuracoes": Settings,
+  "/configuracoes": ListDashBoard,
   "/notfound": NotFound,
   "/entrar": Entrar,
   "/registrar": Registrar,

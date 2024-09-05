@@ -12,6 +12,28 @@ import {
 import jwt from "jsonwebtoken";
 import User from "../../models/User.js";
 import { OAuth2Client } from "google-auth-library";
+import {
+  createCategoria,
+  deleteCategoria,
+  getCategoriaById,
+  getCategorias,
+  getCategoriasPopulated,
+  updateCategoria,
+} from "./../../controllers/categorias/categoriaController.js";
+import {
+  createSubcategoria,
+  deleteSubcategoria,
+  getSubcategoriaById,
+  getSubcategorias,
+  updateSubcategoria,
+} from "./../../controllers/categorias/subcategoriaController.js";
+import {
+  createMateria,
+  deleteMateria,
+  getMateriaById,
+  getMaterias,
+  updateMateria,
+} from "./../../controllers/categorias/materiaController.js";
 
 const router = express.Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -122,5 +144,27 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   updateUser, // Função que vamos criar para atualizar os dados do usuário
 );
+
+// Categorias
+router.post("/categorias", createCategoria);
+router.get("/categorias/populated", getCategoriasPopulated);
+router.delete("/categorias/:id", deleteCategoria);
+router.get("/categorias", getCategorias);
+router.get("/categorias/:id", getCategoriaById);
+router.put("/categorias/:id", updateCategoria);
+
+// Subcategorias
+router.post("/subcategorias", createSubcategoria);
+router.delete("/subcategorias/:id", deleteSubcategoria);
+router.get("/subcategorias", getSubcategorias);
+router.get("/subcategorias/:id", getSubcategoriaById);
+router.put("/subcategorias/:id", updateSubcategoria);
+
+// Matérias
+router.post("/materias", createMateria);
+router.delete("/materias/:id", deleteMateria);
+router.get("/materias", getMaterias);
+router.get("/materias/:id", getMateriaById);
+router.put("/materias/:id", updateMateria);
 
 export default router;

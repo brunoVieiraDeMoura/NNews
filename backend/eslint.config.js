@@ -3,7 +3,6 @@ import pluginJs from "@eslint/js";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintConfigPrettier from "eslint-config-prettier";
 
-
 export default [
   {
     files: ["**/*.{js,mjs,cjs}"],

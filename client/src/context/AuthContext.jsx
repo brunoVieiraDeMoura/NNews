@@ -1,3 +1,4 @@
+// context/AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +18,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setUser("");
+    setUser(null);
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const updateUser = (updatedUser) => {
+    setUser((prevUser) => ({ ...prevUser, ...updatedUser }));
   };
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.valid) {
-            setUser(data.user); // Certifica-se de que `data.user` está completo
+            setUser(data.user);
           } else {
             logout();
           }
@@ -51,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );
@@ -61,4 +66,4 @@ AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AuthContext;
+export default AuthProvider;

@@ -95,7 +95,6 @@ const Login = ({ onItemClick }) => {
           localStorage.setItem("userPicture", data.user.picture);
           login(data.user, data.token);
         }
-        window.location.href = "/dashboard";
       } else {
         console.error("Erro no login com Google:", data.msg);
       }
@@ -147,12 +146,16 @@ const Login = ({ onItemClick }) => {
             </IconButton>
           </Alert>
         )}
-        <Container>
+        <Container className="animate__animated animate__fadeIn">
           <Box
             sx={{
               width: {
                 xs: "100%",
                 md: "90%",
+              },
+              mt: {
+                xs: 1,
+                md: 0,
               },
               p: 4,
               borderRadius: 1,
@@ -261,6 +264,7 @@ const Login = ({ onItemClick }) => {
           </Box>
         </Container>
         <Box
+          className="animate__animated animate__rubberBand"
           sx={{
             width: "100%",
             p: 2,

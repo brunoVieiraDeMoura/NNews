@@ -2,11 +2,12 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
-const colors = {
+export const colors = {
   light: {
     claro: {
       1: "#FEF8ED",
       2: "#F6EDDE",
+      3: "#53402F",
     },
     secondary: {
       1: "#A3B5AD",
@@ -60,7 +61,7 @@ export let lightTheme = createTheme({
         input: {
           marginLeft: "12px",
           "&::placeholder": {
-            color: colors.light.bege[1],
+            color: colors.light.bege[2],
             marginLeft: "12px", // Define a margin do placeholder
           },
           color: "",
@@ -84,6 +85,12 @@ export let lightTheme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          input: {
+            color: colors.light.secondary[2],
+          },
+          "& .Mui-disabled": {
+            color: "#333", // Defina a cor desejada aqui
+          },
           "& .MuiInputBase-root": {
             color: colors.light.Marrom[2], // Cor do texto
           },
@@ -119,7 +126,7 @@ export let lightTheme = createTheme({
     values: {
       xs: 0,
       sm: 600,
-      md: 960,
+      md: 900,
       lg: 1100,
       xl: 1280,
     },
@@ -130,6 +137,8 @@ export let lightTheme = createTheme({
       light: colors.light.Marrom[2],
       dark: colors.light.Marrom[4],
       contrastText: colors.light.claro[2],
+      superLight: colors.light.Marrom[2],
+      mediumLight: colors.light.Marrom[1],
     },
     secondary: {
       main: colors.light.secondary[2],
@@ -214,6 +223,9 @@ export let darkTheme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          input: {
+            color: colors.dark.secondary[2],
+          },
           "& .MuiInputBase-root": {
             color: "red", // Cor do texto
           },
@@ -293,7 +305,9 @@ export let darkTheme = createTheme({
       main: colors.dark.Marrom[3],
       light: colors.dark.claro[2],
       dark: colors.dark.bege[2],
-      contrastText: colors.dark.Marrom[3],
+      contrastText: colors.dark.Marrom[1],
+      superLight: colors.dark.Marrom[2],
+      mediumLight: colors.light.Marrom[1],
     },
     secondary: {
       main: colors.dark.secondary[2],
